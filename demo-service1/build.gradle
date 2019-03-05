@@ -1,0 +1,10 @@
+bootJar {
+  /*
+  mainClassName = ''
+  */
+
+}
+
+dependencies {
+
+}

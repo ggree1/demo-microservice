@@ -1,0 +1,2 @@
+include 'demo-config', 'demo-registry', 'demo-gateway', 'demo-core', 'demo-service1', 'demo-service2'
+
