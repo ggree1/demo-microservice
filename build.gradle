@@ -19,6 +19,7 @@ subprojects {
     apply plugin: "org.springframework.boot"
     apply plugin: "io.spring.dependency-management"
 
+
     sourceCompatibility = '1.8'
     targetCompatibility = '1.8'
 
@@ -33,7 +34,7 @@ subprojects {
     compileJava.dependsOn(processResources)
 
     test {
-        include "**/model/**", "**/controller/**", "**/usecase/**", "**/util/**", "**/context/**"
+        
     }
 
     springBoot {
@@ -58,8 +59,8 @@ subprojects {
         implementation "org.springframework.cloud:spring-cloud-starter-sleuth"
         implementation "org.springframework.boot:spring-boot-starter-actuator"
         implementation "org.springframework.cloud:spring-cloud-starter-bus-amqp"
-        /*
         implementation "org.springframework.cloud:spring-cloud-starter-netflix-eureka-client"
+        /*
         implementation "org.springframework.boot:spring-boot-starter-security"
         */
         implementation "org.springframework.boot:spring-boot-starter-aop"
@@ -83,6 +84,7 @@ subprojects {
         testAnnotationProcessor "org.projectlombok:lombok"
         testCompileOnly "org.projectlombok:lombok"
         testImplementation "org.springframework.boot:spring-boot-starter-test"
+
     }
 
     task initSourceFolders {
@@ -98,7 +100,9 @@ subprojects {
             }
         }
     }
+
 }
+
 
 project(':demo-service1') {
     dependencies {

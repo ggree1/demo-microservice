@@ -1,0 +1,40 @@
+spring:
+  application:
+    name: eureka-server
+
+server:
+  port: ${PORT:8761}
+
+
+eureka:
+  instance:
+    hostname: localhost
+    serviceUrl:
+      defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka/
+  server:
+    # 자가보존모드 - eureka 로의 네트워크는 단절되었지만, 해당 서비스 API를 호출하는데 문제가 없는 경우가 있을수 있어서 registry에서 문제된 instance를 정해진 기간 동안 제거하지 않을 수 있다
+    enable-self-preservation: true
+  client:
+    # 본인 서비스를 eureka 서버에 등록 할지 여부.(eureka는 서버이면서 클라이언트)
+    register-with-eureka: true
+    # defaultZone의 유레카 서버에서 클라이언트 정보를 가져온다(registerWithEureka가 true로 설정시)
+    fetch-registry: true
+
+
+---
+#spring:
+#  profiles: eureka1
+#eureka:
+#  instance:
+#    hostname: eureka1
+#    serviceUrl:
+#      defaultZone: http://eureka2:8761/eureka/
+---
+#spring:
+#  profiles: eureka2
+#eureka:
+#  instance:
+#    hostname: eureka2
+#  client:
+#    serviceUrl:
+#      defaultZone: http://eureka1:8762/eureka/
