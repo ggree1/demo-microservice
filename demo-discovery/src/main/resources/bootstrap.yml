@@ -15,10 +15,12 @@ eureka:
     # 자가보존모드 - eureka 로의 네트워크는 단절되었지만, 해당 서비스 API를 호출하는데 문제가 없는 경우가 있을수 있어서 registry에서 문제된 instance를 정해진 기간 동안 제거하지 않을 수 있다
     enable-self-preservation: true
   client:
-    # 본인 서비스를 eureka 서버에 등록 할지 여부.(eureka는 서버이면서 클라이언트)
-    register-with-eureka: true
-    # defaultZone의 유레카 서버에서 클라이언트 정보를 가져온다(registerWithEureka가 true로 설정시)
-    fetch-registry: true
+    # 본인 서비스를 eureka 서버에 등록 할지 여부.(eureka는 서버이면서 클라이언트) 클러스터링시 true로..
+    #register-with-eureka: true
+    register-with-eureka: false
+    # defaultZone의 유레카 서버에서 클라이언트 정보를 가져온다(registerWithEureka가 true로 설정시) 클러스터링시 true로..
+    #fetch-registry: true
+    fetch-registry: false
 
 
 ---

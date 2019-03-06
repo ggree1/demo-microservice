@@ -1,8 +1,5 @@
 bootJar {
-    /*
-    mainClassName = ''
-    */
-
+    mainClassName = 'com.demo.DiscoveryServerApplication'
 }
 
 dependencies {
