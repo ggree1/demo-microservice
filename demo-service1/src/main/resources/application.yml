@@ -1,17 +1,14 @@
+
+feign:
+  hystrix:
+    enabled: true
+
 hystrix:
-threadpool:
-  default:
-    coreSize: 100  # Hystrix Thread Pool default size
-    maximumSize: 500  # Hystrix Thread Pool default size
-    keepAliveTimeMinutes: 1
-    allowMaximumSizeToDivergeFromCoreSize: true
-command:
-  default:
-    execution:
-      isolation:
-        thread:
-          timeoutInMilliseconds: 3000     #설정 시간동안 처리 지연발생시 timeout and 설정한 fallback 로직 수행
-    circuitBreaker:
-      requestVolumeThreshold: 2                # 설정수 값만큼 요청이 들어온 경우만 circut open 여부 결정 함
-      errorThresholdPercentage: 50        # requestVolumn값을 넘는 요청 중 설정 값이상 비율이 에러인 경우 circuit open
-      enabled: true
+  command:
+    "HttpBinClient#delay(int)":
+      # 최근 1분 내에, 5번 이상의 요청이 있었고, 그 중 50% 이상이 오류가 발생했다면, command를 실행하지 않고 fallback을 실행하겠다는 의미
+      execution.isolation.thread.timeoutInMilliseconds: 3000 # hystirx명령에 대해 3초 timeout 설정
+      metrics.rollingStats.timeInMilliseconds: 60000 # 60초의 window slice를 가짐(30초씩 감시)
+      circuitBreaker.requestVolumeThreshold: 5 # 최소 5번 이상의 요청이 있어야함
+      circuitBreaker.errorThresholdPercentage: 50 # 50% 이상 오류가 발생시 회로를 오픈(circuit open)
+

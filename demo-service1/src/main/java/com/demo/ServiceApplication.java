@@ -9,6 +9,7 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
 import org.springframework.cloud.client.circuitbreaker.EnableCircuitBreaker;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.cloud.client.loadbalancer.LoadBalanced;
+import org.springframework.cloud.netflix.hystrix.dashboard.EnableHystrixDashboard;
 import org.springframework.context.annotation.Bean;
 import org.springframework.web.client.RestTemplate;
 
@@ -16,6 +17,9 @@ import org.springframework.web.client.RestTemplate;
 @EnableConfigurationProperties
 @EnableDiscoveryClient // eureka 외 다른 디스커버리 서버를 사용할 경우
 @EnableCircuitBreaker
+@EnableHystrixDashboard
+//@EnableFeignClients
+//@EnableHystrix
 @SpringBootApplication
 public class ServiceApplication {
 
