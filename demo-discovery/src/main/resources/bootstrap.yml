@@ -12,8 +12,9 @@ eureka:
     serviceUrl:
       defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka/
   server:
-    # 자가보존모드 - eureka 로의 네트워크는 단절되었지만, 해당 서비스 API를 호출하는데 문제가 없는 경우가 있을수 있어서 registry에서 문제된 instance를 정해진 기간 동안 제거하지 않을 수 있다
-    enable-self-preservation: true
+    # 레지스트리에 등록된 노드중 정해진 시간에 heartbeat을 보내지 않는 노드 비율이 높아지면 유레카는 이를 네트워크 문제라 인식하고 노드를 제거하지 않는다.
+    # true 로 해도 되지만 적은 수의 인스턴스로 구성된 경우엔 기대한 대로 동작하지 않을 수 있다.
+    enable-self-preservation: false
   client:
     # 본인 서비스를 eureka 서버에 등록 할지 여부.(eureka는 서버이면서 클라이언트) 클러스터링시 true로..
     #register-with-eureka: true
