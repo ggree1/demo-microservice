@@ -105,6 +105,12 @@ subprojects {
 
 }
 
+task print() {
+    doLast{
+        println "github push complete!"
+    }
+}
+
 
 project(':demo-service1') {
     dependencies {
