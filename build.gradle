@@ -107,7 +107,7 @@ subprojects {
 
 task print() {
     doFirst{
-        ptinln "gibhub push start!"
+        println "gibhub push start!"
     }
     doLast{
         println "github push complete!"
