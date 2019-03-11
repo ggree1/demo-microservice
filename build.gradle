@@ -31,7 +31,7 @@ subprojects {
         options.addBooleanOption('Xdoclint:none', true)
     }
 
-
+    compileJava.dependsOn(processResources)
 
     test {
         
@@ -56,8 +56,6 @@ subprojects {
 
         implementation "org.springframework.cloud:spring-cloud-starter-openfeign"
         implementation "org.springframework.cloud:spring-cloud-starter-sleuth"
-        implementation "org.springframework.cloud:spring-cloud-starter-hystrix"
-        implementation "org.springframework.cloud:spring-cloud-starter-netflix-hystrix-dashboard"
         implementation "org.springframework.boot:spring-boot-starter-actuator"
         implementation "org.springframework.cloud:spring-cloud-starter-bus-amqp"
         /*
@@ -66,8 +64,6 @@ subprojects {
         */
         implementation "org.springframework.boot:spring-boot-starter-aop"
         implementation "org.springframework.boot:spring-boot-starter-cache"
-        implementation "org.springframework.boot:spring-boot-starter-data-jpa"
-        implementation "org.springframework.boot:spring-boot-starter-data-rest"
         implementation "org.springframework.boot:spring-boot-starter-web"
         implementation "org.ehcache:ehcache"
         implementation "javax.cache:cache-api"
