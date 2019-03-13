@@ -13,3 +13,8 @@ spring:
           search-paths:
             - "{application}/"
 
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"

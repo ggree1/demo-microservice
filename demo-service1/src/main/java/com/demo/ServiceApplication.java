@@ -16,13 +16,11 @@ import org.springframework.web.client.RestTemplate;
 
 @Slf4j
 @EnableConfigurationProperties
-@EnableDiscoveryClient // eureka 외 다른 디스커버리 서버를 사용할 경우
+@EnableDiscoveryClient
 @EnableCircuitBreaker
 @EnableHystrixDashboard
-//@EnableFeignClients
-//@EnableHystrix
-@RefreshScope
 @SpringBootApplication
+@RefreshScope
 public class ServiceApplication {
 
     public static void main(String[] args) {

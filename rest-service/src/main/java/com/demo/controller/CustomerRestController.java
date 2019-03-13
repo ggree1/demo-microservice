@@ -5,6 +5,7 @@ import com.demo.exception.CustomerNotFoundException;
 import com.demo.repository.CustomerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpMethod;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.method.annotation.MvcUriComponentsBuilder;
@@ -14,7 +15,7 @@ import java.net.URI;
 import java.util.Collection;
 
 @RestController
-@RequestMapping("/v1/customers")
+@RequestMapping(value = "/api/v1/customers")
 public class CustomerRestController {
 
     @Autowired

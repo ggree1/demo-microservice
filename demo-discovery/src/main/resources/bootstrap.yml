@@ -1,43 +1,16 @@
-spring:
-  application:
-    name: eureka-server
-
 server:
   port: ${PORT:8761}
 
 
-eureka:
-  instance:
-    hostname: localhost
-    serviceUrl:
-      defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka/
-  server:
-    # 레지스트리에 등록된 노드중 정해진 시간에 heartbeat을 보내지 않는 노드 비율이 높아지면 유레카는 이를 네트워크 문제라 인식하고 노드를 제거하지 않는다.
-    # true 로 해도 되지만 적은 수의 인스턴스로 구성된 경우엔 기대한 대로 동작하지 않을 수 있다.
-    enable-self-preservation: false
-  client:
-    # 본인 서비스를 eureka 서버에 등록 할지 여부.(eureka는 서버이면서 클라이언트) 클러스터링시 true로..
-    #register-with-eureka: true
-    register-with-eureka: false
-    # defaultZone의 유레카 서버에서 클라이언트 정보를 가져온다(registerWithEureka가 true로 설정시) 클러스터링시 true로..
-    #fetch-registry: true
-    fetch-registry: false
+spring:
+  application:
+    name: eureka-server
 
+  cloud:
+    config:
+      uri: http://localhost:8888
+      name: demo-discovery
 
----
-#spring:
-#  profiles: eureka1
-#eureka:
-#  instance:
-#    hostname: eureka1
-#    serviceUrl:
-#      defaultZone: http://eureka2:8761/eureka/
----
-#spring:
-#  profiles: eureka2
-#eureka:
-#  instance:
-#    hostname: eureka2
-#  client:
-#    serviceUrl:
-#      defaultZone: http://eureka1:8762/eureka/
+  profiles:
+    active: dev
+

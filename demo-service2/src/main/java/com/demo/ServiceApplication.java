@@ -3,11 +3,11 @@ package com.demo;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
+import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
-import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 
 @Slf4j
-@EnableEurekaClient
+@EnableDiscoveryClient
 @SpringBootApplication
 @RefreshScope
 public class ServiceApplication {
