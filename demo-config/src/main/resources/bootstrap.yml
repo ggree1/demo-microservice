@@ -5,4 +5,11 @@ spring:
   application:
     name: config-server
 
+  cloud:
+    config:
+      server:
+        git:
+          uri: https://github.com/ggree1/config-repo/
+          search-paths:
+            - "{application}/"
 

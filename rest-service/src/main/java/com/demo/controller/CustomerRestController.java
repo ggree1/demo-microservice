@@ -20,18 +20,15 @@ public class CustomerRestController {
     @Autowired
     private CustomerRepository customerRepository;
 
-    // <1>
     @RequestMapping(method = RequestMethod.OPTIONS)
     ResponseEntity<?> options() {
 
-        //@formatter:off
         return ResponseEntity
                 .ok()
                 .allow(HttpMethod.GET, HttpMethod.POST,
                         HttpMethod.HEAD, HttpMethod.OPTIONS,
                         HttpMethod.PUT, HttpMethod.DELETE)
                 .build();
-        //@formatter:on
     }
 
     @GetMapping
@@ -39,7 +36,6 @@ public class CustomerRestController {
         return ResponseEntity.ok(this.customerRepository.findAll());
     }
 
-    // <2>
     @GetMapping(value = "/{id}")
     ResponseEntity<Customer> get(@PathVariable Long id) {
         return this.customerRepository.findById(id).map(ResponseEntity::ok)
@@ -47,7 +43,7 @@ public class CustomerRestController {
     }
 
     @PostMapping
-    ResponseEntity<Customer> post(@RequestBody Customer c) { // <3>
+    ResponseEntity<Customer> post(@RequestBody Customer c) {
 
         Customer customer = this.customerRepository.save(new Customer(c
                 .getFirstName(), c.getLastName()));
@@ -57,7 +53,6 @@ public class CustomerRestController {
         return ResponseEntity.created(uri).body(customer);
     }
 
-    // <4>
     @DeleteMapping(value = "/{id}")
     ResponseEntity<?> delete(@PathVariable Long id) {
         return this.customerRepository.findById(id).map(c -> {
@@ -66,7 +61,6 @@ public class CustomerRestController {
         }).orElseThrow(() -> new CustomerNotFoundException(id));
     }
 
-    // <5>
     @RequestMapping(value = "/{id}", method = RequestMethod.HEAD)
     ResponseEntity<?> head(@PathVariable Long id) {
         return this.customerRepository.findById(id)
@@ -74,7 +68,6 @@ public class CustomerRestController {
                 .orElseThrow(() -> new CustomerNotFoundException(id));
     }
 
-    // <6>
     @PutMapping(value = "/{id}")
     ResponseEntity<Customer> put(@PathVariable Long id, @RequestBody Customer c) {
         return this.customerRepository

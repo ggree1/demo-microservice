@@ -2,6 +2,7 @@ package com.demo.domain;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import java.util.Objects;
 
@@ -9,10 +10,11 @@ import java.util.Objects;
 public class Customer {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String firstName, lastName;
+    private String firstName;
+    private String lastName;
 
     public Customer(Long id, String f, String l) {
         this.id = id;
@@ -26,6 +28,19 @@ public class Customer {
     public Customer(String firstName, String lastName) {
         this.firstName = firstName;
         this.lastName = lastName;
+    }
+
+
+    public Long getId() {
+        return id;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
     }
 
     @Override
@@ -49,17 +64,5 @@ public class Customer {
     public String toString() {
         return "Customer{" + "id=" + id + ", firstName='" + firstName + '\''
                 + ", lastName='" + lastName + '\'' + '}';
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
     }
 }
