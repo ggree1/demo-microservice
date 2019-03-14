@@ -19,7 +19,7 @@ public class ItemController {
     @Autowired
     HttpServletRequest request;
 
-    @GetMapping("/{name}/items")
+    @GetMapping(path = "/{name}/items")
     public List<Item> getItem(@PathVariable String name) {
         log.info("getItem : " + name);
         List<Item> itemList = new ArrayList<>();

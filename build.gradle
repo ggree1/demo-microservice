@@ -113,8 +113,12 @@ project(':demo-service1') {
         implementation project(':demo-core')
     }
 }
-
 project(':demo-service2') {
+    dependencies {
+        implementation project(':demo-core')
+    }
+}
+project(':rest-service') {
     dependencies {
         implementation project(':demo-core')
     }

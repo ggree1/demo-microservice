@@ -5,7 +5,6 @@ import com.demo.exception.CustomerNotFoundException;
 import com.demo.repository.CustomerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpMethod;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.method.annotation.MvcUriComponentsBuilder;
@@ -65,7 +64,7 @@ public class CustomerRestController {
     @RequestMapping(value = "/{id}", method = RequestMethod.HEAD)
     ResponseEntity<?> head(@PathVariable Long id) {
         return this.customerRepository.findById(id)
-                .map(exists -> ResponseEntity.noContent().build())
+                   .map(exists -> ResponseEntity.noContent().build())
                 .orElseThrow(() -> new CustomerNotFoundException(id));
     }
 

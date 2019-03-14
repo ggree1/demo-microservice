@@ -16,12 +16,12 @@ import java.util.concurrent.atomic.AtomicLong;
 
 @Slf4j
 @RestController
-@RequestMapping("/demo2")
+@RequestMapping(path = "/demo2")
 public class ByeController {
 
     private final AtomicLong listenerCouter = new AtomicLong(0);
 
-    @GetMapping("/")
+    @GetMapping(path = "/")
     String greeting(@Value("${test.message}") String testMessage) {
         return testMessage;
     }
@@ -34,12 +34,12 @@ public class ByeController {
         log.info(":::::::: the refresh count is not at " + this.listenerCouter.incrementAndGet());
     }
 
-    @GetMapping("/bye/{name}")
+    @GetMapping(path = "/bye/{name}")
     Map<String, String> byeName(@PathVariable String name) {
         return Collections.singletonMap("byeName", "Bye!, " + name);
     }
 
-    @GetMapping("/byebye/{name}")
+    @GetMapping(path = "/byebye/{name}")
     ResponseEntity<String> getCollection(@PathVariable String name) {
         return ResponseEntity.ok("Bye Bye " + name);
     }
