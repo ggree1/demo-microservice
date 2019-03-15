@@ -1,4 +1,4 @@
-package com.demo.hystrix;
+package com.demo.domain;
 
 import lombok.NoArgsConstructor;
 

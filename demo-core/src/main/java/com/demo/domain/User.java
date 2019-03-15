@@ -1,7 +1,10 @@
-package com.demo.hystrix.model;
+package com.demo.domain;
+
+import lombok.NoArgsConstructor;
 
 import java.util.List;
 
+@NoArgsConstructor
 public class User {
 
     private String name;

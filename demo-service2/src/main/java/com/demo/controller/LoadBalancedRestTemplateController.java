@@ -10,13 +10,17 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Collection;
 
+/**
+ * rest-service 의 /api/v1/customers 를 호출
+ */
+
 @RestController
 @RequestMapping(path = "/demo2")
-public class ServiceController {
+public class LoadBalancedRestTemplateController {
 
     private LoadBalancedRestTemplateService loadBalancedRestTemplateService;
 
-    public ServiceController(LoadBalancedRestTemplateService loadBalancedRestTemplateService) {
+    public LoadBalancedRestTemplateController(LoadBalancedRestTemplateService loadBalancedRestTemplateService) {
         this.loadBalancedRestTemplateService = loadBalancedRestTemplateService;
     }
 

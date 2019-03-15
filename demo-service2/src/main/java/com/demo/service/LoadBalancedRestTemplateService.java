@@ -22,7 +22,7 @@ public class LoadBalancedRestTemplateService {
 
     private final RestTemplate restTemplate;
 
-    public LoadBalancedRestTemplateService(@LoadBalanced RestTemplate restTemplate) {
+    public LoadBalancedRestTemplateService(RestTemplate restTemplate) {
         this.restTemplate = restTemplate;
     }
 

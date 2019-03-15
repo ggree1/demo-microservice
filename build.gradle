@@ -58,20 +58,13 @@ subprojects {
         implementation "org.springframework.cloud:spring-cloud-starter-sleuth"
         implementation "org.springframework.boot:spring-boot-starter-actuator"
         implementation "org.springframework.cloud:spring-cloud-starter-bus-amqp"
-        /*
-        implementation "org.springframework.boot:spring-boot-starter-security"
-        implementation "org.springframework.cloud:spring-cloud-starter-netflix-turbine"
-        */
+        
         implementation "org.springframework.boot:spring-boot-starter-aop"
         implementation "org.springframework.boot:spring-boot-starter-cache"
         implementation "org.springframework.boot:spring-boot-starter-web"
         implementation "org.ehcache:ehcache"
         implementation "javax.cache:cache-api"
         implementation "com.fasterxml.jackson.datatype:jackson-datatype-hibernate5"
-        /*
-        implementation "org.eclipse.collections:eclipse-collections:9.2.0"
-        implementation "org.eclipse.collections:eclipse-collections-api:9.2.0"
-        */
         implementation "commons-io:commons-io:2.6"
         implementation "org.apache.commons:commons-lang3"
         /*
