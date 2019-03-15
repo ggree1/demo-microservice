@@ -1,6 +1,6 @@
 # practice-microservice
 
-Just practicing repository for micro-service using netflix oss.
+Just practicing repository for micro-service using spring cloud with netflix oss.
 
 (Eureka, ConfigServer, Cloud Bus, Zuul, Hystrix, Feign with Rest)
 
