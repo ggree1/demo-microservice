@@ -16,8 +16,8 @@ public class FeignDemoService2Controller {
     private final FeignDemoService2ItemService feignDemoService2ItemService;
 
     @Autowired
-    public FeignDemoService2Controller(FeignDemoService2ItemService feignUserItemClient) {
-        this.feignDemoService2ItemService = feignUserItemClient;
+    public FeignDemoService2Controller(FeignDemoService2ItemService feignDemoService2ItemService) {
+        this.feignDemoService2ItemService = feignDemoService2ItemService;
     }
 
     @GetMapping("/feign/{name}")
