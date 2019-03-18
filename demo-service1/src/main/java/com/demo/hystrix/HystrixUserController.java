@@ -17,10 +17,10 @@ import java.util.List;
 @Slf4j
 @RestController
 @RequestMapping("/demo1/users")
-public class HystrixUserApiGateway {
+public class HystrixUserController {
 
     @Autowired
-    HystrixUserItemClient hystrixUserService;
+    HystrixUserItemService hystrixUserService;
 
     @GetMapping("/{name}")
     public List<User> getUsers(@PathVariable String name) {

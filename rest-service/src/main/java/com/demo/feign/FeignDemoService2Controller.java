@@ -11,18 +11,18 @@ import java.util.List;
 
 @RestController
 @RequestMapping(path = "/api")
-public class FeignDemoService2ApiGateway {
+public class FeignDemoService2Controller {
 
-    private final FeignDemoService2ItemClient feignDemoService2ItemClient;
+    private final FeignDemoService2ItemService feignDemoService2ItemService;
 
     @Autowired
-    public FeignDemoService2ApiGateway(FeignDemoService2ItemClient feignUserItemClient) {
-        this.feignDemoService2ItemClient = feignUserItemClient;
+    public FeignDemoService2Controller(FeignDemoService2ItemService feignUserItemClient) {
+        this.feignDemoService2ItemService = feignUserItemClient;
     }
 
     @GetMapping("/feign/{name}")
     List<Item> feign(@PathVariable String name) {
-        return this.feignDemoService2ItemClient.getItemListByFeign(name);
+        return this.feignDemoService2ItemService.getItemListByFeign(name);
     }
 
 

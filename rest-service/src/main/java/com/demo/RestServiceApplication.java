@@ -5,6 +5,7 @@ import com.demo.repository.CustomerRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cloud.client.circuitbreaker.EnableCircuitBreaker;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.cloud.openfeign.EnableFeignClients;
@@ -14,6 +15,7 @@ import java.util.stream.IntStream;
 
 @SpringBootApplication
 @EnableDiscoveryClient
+@EnableCircuitBreaker
 @EnableFeignClients
 @RefreshScope
 public class RestServiceApplication {

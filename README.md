@@ -1,18 +1,18 @@
 # practice-microservice
 
 Just practicing repository for micro-service using spring cloud with netflix oss.
-
 (Eureka, ConfigServer, Cloud Bus, Zuul, Hystrix, Feign with Rest)
 
-
-ConfigurationRepo to  https://github.com/ggree1/config-repo
+* ConfigurationRepo to  https://github.com/ggree1/config-repo
+* need RabbitMQ to work spring cloud bus and running server properly
+(  docker run -d --hostname my-rabbit --name my-rabbit -p 15672:15672 -p 5672:5672 rabbitmq ) 
 
 ======================================================================
 
 8095/demo-service1/demo1/users/{name} ---> demo-service2의 /users/{name}/items 호출 (hystrix test)
 8095/demo1/users/{name}
 
-8095/rest-service/api/feign/{name} ----> demo-service2의 /users/{name}/items 호출 (feign test)
+8095/rest-service/api/feign/{name} ----> demo-service2의 /users/{name}/items 호출 (feign & hystrix test)
 8095/api/feign/{name}
 
 8095/demo-service2/demo2/call/customers (/{id})  ----> rest서비스의 /api/v1/customers 호출 (LoadBalanced RestTemplate test)
