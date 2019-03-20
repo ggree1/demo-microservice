@@ -1,8 +1,6 @@
-package com.demo.controller;
+package com.demo.customer;
 
 import com.demo.domain.Customer;
-import com.demo.exception.CustomerNotFoundException;
-import com.demo.repository.CustomerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;

@@ -1,14 +1,15 @@
-package com.demo.controller;
+package com.demo.customer;
 
 import com.demo.domain.Customer;
-import com.demo.repository.CustomerRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.ImportAutoConfiguration;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.cloud.autoconfigure.RefreshAutoConfiguration;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
@@ -17,7 +18,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
-import static com.demo.controller.TestUtils.lambaMatcher;
+import static com.demo.customer.TestUtils.lambaMatcher;
 import static org.hamcrest.Matchers.*;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.verify;
@@ -25,6 +26,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @RunWith(SpringRunner.class)
+@ImportAutoConfiguration(RefreshAutoConfiguration.class)
 @WebMvcTest(CustomerRestController.class)
 public class CustomerRestControllerTest {
 
@@ -42,7 +44,7 @@ public class CustomerRestControllerTest {
 
     private Customer wellKnownCustomer;
 
-    private String rootPath = "/v1/customers";
+    private String rootPath = "/api/v1/customers";
 
     @Before
     public void before() {

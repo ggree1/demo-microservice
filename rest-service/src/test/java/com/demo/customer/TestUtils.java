@@ -1,4 +1,4 @@
-package com.demo.controller;
+package com.demo.customer;
 
 import org.hamcrest.BaseMatcher;
 import org.hamcrest.Description;

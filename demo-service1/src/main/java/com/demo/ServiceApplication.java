@@ -32,7 +32,7 @@ public class ServiceApplication {
         log.info("ConfigurationProjectProperties.projectName : " + cp.getProjectName());
     }
 
-    // RestTemplate 인스턴스는 스프링 클라우드에 의해 인터셉터가 설정된 클라이언트 로드밸런싱 기능 적용
+    // RestTemplate에 Ribbon의 로드밸런싱 기능 적용
     @LoadBalanced
     @Bean
     public RestTemplate restTemplate() {
