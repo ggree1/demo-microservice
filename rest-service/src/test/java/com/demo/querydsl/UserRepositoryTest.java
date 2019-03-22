@@ -8,6 +8,8 @@ import org.springframework.boot.autoconfigure.ImportAutoConfiguration;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.cloud.autoconfigure.RefreshAutoConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.transaction.annotation.Transactional;
+
 import java.util.List;
 import java.util.stream.IntStream;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -15,6 +17,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 @DataJpaTest
 @ImportAutoConfiguration(RefreshAutoConfiguration.class)
 @RunWith(SpringRunner.class)
+@Transactional
 public class UserRepositoryTest {
 
     @Autowired
@@ -28,6 +31,9 @@ public class UserRepositoryTest {
 
     @Before
     public void setUp() {
+        userRepository.deleteAll();
+        accountRepository.deleteAll();
+
         dk = User.builder().name("dk").age(38L).email("dk@naver.com").build();
         lyn = User.builder().name("lyn").age(35L).email("lyn@naver.com").build();
         userRepository.save(dk);
@@ -36,23 +42,21 @@ public class UserRepositoryTest {
         IntStream.range(1, 11).forEach(i -> accountRepository.save(new Account(dk, "accNum"+i, "someBank")));
         IntStream.range(1, 11).forEach(i -> accountRepository.save(new Account(lyn, "accNum"+i, "someBank")));
 
-        Account thirdAcc = accountRepository.findById(3L).get();
-        thirdAcc.changeMoney(new Double(350));
+        accountRepository.findAll().forEach(
+                account -> System.out.println(":: " + account.toString())
+        );
     }
 
     @Test
     public void testSavedData() throws Exception {
         Account persistedAccount = accountRepository.findById(3L).orElse(null);
+        persistedAccount.changeMoney(350D);
+        accountRepository.save(persistedAccount);
+        Account thirdAcc = accountRepository.findById(3L).get();
         Account nonPersistedData = accountRepository.findById(100L).orElse(null);
-        assertThat(persistedAccount.getMoney()).isEqualTo(350);
+        assertThat(thirdAcc.getMoney()).isEqualTo(350);
         assertThat(nonPersistedData).isNull();
     }
-
-    /** todo
-     *
-     * querydsl 설정 정리 : build.gradle - querydsl - gradle (other-compileJava 로 빌드시 Q클래스 생성)
-     * custom 설정시 쿼리메소드 및 querdydsl dto 사용시 오류 수정 / nameListByAge에서 user의 name만 가져오기 찾기
-     */
 
     @Test
     public void querydslUserRepositoryTest() throws Exception {
@@ -64,21 +68,20 @@ public class UserRepositoryTest {
         assertThat(persistedLyn).isNotNull();
         assertThat(persistedLyn.getName()).isEqualTo("lyn");
 
-        List<User> userListByAge = userRepository.findAllUserByAge(38L);
+        List<User> userListByAge = userRepository.findUserByAge(38L);
         assertThat(userListByAge.size()).isEqualTo(1);
         assertThat(userListByAge.get(0).getName()).isEqualTo("dk");
 
-        List<String> nameListByAge = userRepository.findAllUserNameByAge(35L);
+        List<String> nameListByAge = userRepository.findUserNameByAge(35L);
         assertThat(nameListByAge.size()).isEqualTo(1);
-        //assertThat(nameListByAge.get(0)).isEqualTo("lyn");
-        System.out.println("::: " + nameListByAge.get(0));
+        assertThat(nameListByAge.get(0)).isEqualTo("lyn");
 
-        List<User> nonList = userRepository.findAllUserByAge(10L);
+        List<User> nonList = userRepository.findUserByAge(10L);
         assertThat(nonList).isEmpty();
 
-        List<AccountUserJoinDto> dtoList = userRepository.findAllUserByAgeGreaterThan(10L);
+        List<AccountUserJoinDto> dtoList = userRepository.findAccountUserJoinData(null, 38L, null);
         assertThat(dtoList).isNotNull();
-        assertThat(dtoList.size()).isEqualTo(2);
+        assertThat(dtoList.size()).isEqualTo(10);
     }
 
 }

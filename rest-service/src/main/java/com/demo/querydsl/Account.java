@@ -4,6 +4,7 @@ package com.demo.querydsl;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 import javax.persistence.*;
 
@@ -11,6 +12,7 @@ import javax.persistence.*;
 @Table(name = "tb_account")
 @Getter
 @Setter
+@ToString(exclude = "user")
 public class Account {
 
     @Id

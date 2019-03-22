@@ -4,8 +4,8 @@ import java.util.List;
 
 public interface UserRepositoryCustom {
 
-    List<User> findAllUserByAge(Long age);
-    List<String> findAllUserNameByAge(Long age);
-    List<AccountUserJoinDto> findAllUserByAgeGreaterThan(Long age);
+    List<User> findUserByAge(Long age);
+    List<String> findUserNameByAge(Long age);
+    List<AccountUserJoinDto> findAccountUserJoinData(String name, Long age, String email);
 
 }
