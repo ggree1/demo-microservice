@@ -1,7 +1,5 @@
 package com.demo.querydsl;
 
-import lombok.Builder;
-
 public class AccountUserJoinDto {
 
     private String name;
