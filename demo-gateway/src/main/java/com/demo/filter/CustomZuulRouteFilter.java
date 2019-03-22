@@ -25,16 +25,14 @@ public class CustomZuulRouteFilter extends ZuulFilter {
 
     @Override
     public boolean shouldFilter() {
-        log.info("serviceId : " + RequestContext.getCurrentContext().get(SERVICE_ID_KEY));
-        return RequestContext.getCurrentContext().getRouteHost() != null
-                && RequestContext.getCurrentContext().sendZuulResponse();
+        return true;
     }
+
     @Override
     public Object run() {
         RequestContext ctx = RequestContext.getCurrentContext();
         HttpServletRequest request = ctx.getRequest();
-        log.info("request uri in route filter run : " + request.getRequestURI());
-        log.info("serviceId in route filter run : " + ctx.get(SERVICE_ID_KEY));
+        log.info(String.format("request uri in route filter run : %s, serviceId : %s", request.getRequestURI(), ctx.get(SERVICE_ID_KEY)));
         return null;
     }
 }

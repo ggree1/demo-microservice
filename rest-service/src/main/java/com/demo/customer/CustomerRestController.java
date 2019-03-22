@@ -1,6 +1,10 @@
 package com.demo.customer;
 
 import com.demo.domain.Customer;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
@@ -40,8 +44,16 @@ public class CustomerRestController {
                 .orElseThrow(() -> new CustomerNotFoundException(id));
     }
 
+    @ApiOperation(value = "create customer", notes = "create a customer with firstName and lastName")
+    @ApiResponses({
+            @ApiResponse(code = 200, message = "200 - created"),
+            @ApiResponse(code = 201, message = "201 - created")
+    })
     @PostMapping
-    ResponseEntity<Customer> post(@RequestBody Customer c) {
+    ResponseEntity<Customer> post(@RequestBody
+                                  @ApiParam(name = "customer to be created",
+                                          value = "firstName, lastName - no Id needed")
+                                          Customer c) {
 
         Customer customer = this.customerRepository.save(new Customer(c
                 .getFirstName(), c.getLastName()));
@@ -62,7 +74,7 @@ public class CustomerRestController {
     @RequestMapping(value = "/{id}", method = RequestMethod.HEAD)
     ResponseEntity<?> head(@PathVariable Long id) {
         return this.customerRepository.findById(id)
-                   .map(exists -> ResponseEntity.noContent().build())
+                .map(exists -> ResponseEntity.noContent().build())
                 .orElseThrow(() -> new CustomerNotFoundException(id));
     }
 

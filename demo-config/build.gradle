@@ -1,9 +1,9 @@
 bootJar {
-  mainClassName = 'com.demo.ConfigServerApplication'
+  mainClassName = "com.demo.ConfigServerApplication"
 }
 
 dependencies {
-  implementation 'org.springframework.cloud:spring-cloud-config-server'
-  implementation 'org.springframework.cloud:spring-cloud-config-monitor'
-  implementation 'org.springframework.cloud:spring-cloud-starter-stream-rabbit'
+  implementation "org.springframework.cloud:spring-cloud-config-server"
+  implementation "org.springframework.cloud:spring-cloud-config-monitor"
+  implementation "org.springframework.cloud:spring-cloud-starter-stream-rabbit"
 }

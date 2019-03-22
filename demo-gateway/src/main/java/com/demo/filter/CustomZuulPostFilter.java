@@ -26,7 +26,7 @@ public class CustomZuulPostFilter extends ZuulFilter {
     @Override
     public Object run() {
         RequestContext ctx = RequestContext.getCurrentContext();
-        log.info("serviceId in post filter run : " + ctx.get(SERVICE_ID_KEY)); // http://uri/유레카서비스명/api 형태로 호출시만 읽어온다.
+        log.info(String.format("serviceId in post filter run : %s ", ctx.get(SERVICE_ID_KEY)));
         return null;
     }
 }

@@ -1,11 +1,8 @@
 bootJar {
-    mainClassName = 'com.demo.DiscoveryServerApplication'
+    mainClassName = "com.demo.DiscoveryServerApplication"
 }
 
 dependencies {
-    implementation 'org.springframework.cloud:spring-cloud-config-client'
-    implementation 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-server'
-    /*
-    implementation "com.h2database:h2"
-    */
+    implementation "org.springframework.cloud:spring-cloud-config-client"
+    implementation "org.springframework.cloud:spring-cloud-starter-netflix-eureka-server"
 }

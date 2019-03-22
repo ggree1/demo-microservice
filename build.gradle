@@ -1,44 +1,37 @@
 plugins {
     id "org.springframework.boot" version "2.1.2.RELEASE"
     id "io.spring.dependency-management" version "1.0.6.RELEASE"
+    id "net.ltgt.apt" version "0.21"
 }
 
 ext.spring_cloud_version = "Greenwich.RELEASE"
-ext['lombok.version'] = "1.18.4"
+ext["lombok.version"] = "1.18.4"
+ext.queryDslVersion = "4.2.1"
 
 allprojects {
     repositories {
-        jcenter()
+        mavenCentral()
     }
 }
 
 subprojects {
-    version = "2.1.2"
 
     apply plugin: "java"
     apply plugin: "org.springframework.boot"
     apply plugin: "io.spring.dependency-management"
 
+    apply plugin: "net.ltgt.apt"
+    apply plugin: "net.ltgt.apt-idea"
 
-    sourceCompatibility = '1.8'
-    targetCompatibility = '1.8'
+    sourceCompatibility = "1.8"
+    targetCompatibility = "1.8"
 
-    def defaultEncoding = 'UTF-8'
+    def defaultEncoding = "UTF-8"
     tasks.withType(AbstractCompile).each { it.options.encoding = defaultEncoding }
 
     javadoc {
         options.encoding = defaultEncoding
-        options.addBooleanOption('Xdoclint:none', true)
-    }
-
-    compileJava.dependsOn(processResources)
-
-    test {
-        
-    }
-
-    springBoot {
-        buildInfo()
+        options.addBooleanOption("Xdoclint:none", true)
     }
 
     dependencyManagement {
@@ -49,16 +42,12 @@ subprojects {
     }
 
     dependencies {
-        annotationProcessor "org.springframework.boot:spring-boot-configuration-processor"
-        annotationProcessor "org.projectlombok:lombok"
-        compileOnly "org.springframework.boot:spring-boot-configuration-processor"
-        compileOnly "org.projectlombok:lombok"
-
+        
         implementation "org.springframework.cloud:spring-cloud-starter-openfeign"
         implementation "org.springframework.cloud:spring-cloud-starter-sleuth"
         implementation "org.springframework.boot:spring-boot-starter-actuator"
         implementation "org.springframework.cloud:spring-cloud-starter-bus-amqp"
-        
+
         implementation "org.springframework.boot:spring-boot-starter-aop"
         implementation "org.springframework.boot:spring-boot-starter-cache"
         implementation "org.springframework.boot:spring-boot-starter-web"
@@ -67,10 +56,21 @@ subprojects {
         implementation "com.fasterxml.jackson.datatype:jackson-datatype-hibernate5"
         implementation "commons-io:commons-io:2.6"
         implementation "org.apache.commons:commons-lang3"
-        /*
-        implementation "com.ibm.icu:icu4j:63.1"
-        implementation fileTree(dir: 'libs', includes: ['*.jar'])
-        */
+
+        implementation group: "io.springfox", name: "springfox-swagger2", version: "2.9.2"
+        implementation group: "io.springfox", name: "springfox-swagger-ui", version: "2.9.2"
+
+        implementation "com.querydsl:querydsl-core:${queryDslVersion}"
+        implementation "com.querydsl:querydsl-jpa:${queryDslVersion}"
+        annotationProcessor "com.querydsl:querydsl-apt:${queryDslVersion}:jpa",
+                            "org.hibernate.javax.persistence:hibernate-jpa-2.1-api:1.0.2.Final",
+                            "javax.annotation:javax.annotation-api:1.3.2",
+                            "org.projectlombok:lombok",
+                            "org.springframework.boot:spring-boot-configuration-processor"
+        
+        compileOnly "org.springframework.boot:spring-boot-configuration-processor"
+        compileOnly "org.projectlombok:lombok"
+
         runtime "com.h2database:h2"
         testAnnotationProcessor "org.projectlombok:lombok"
         testCompileOnly "org.projectlombok:lombok"
@@ -84,15 +84,15 @@ subprojects {
                 it.mkdirs()
             }
         }
-
         sourceSets*.resources.srcDirs*.each {
             if( !it.exists() ) {
                 it.mkdirs()
             }
         }
     }
-
+    
 }
+
 
 task print() {
     doLast{
@@ -100,20 +100,19 @@ task print() {
     }
 }
 
-
-project(':demo-service1') {
+project(":demo-service1") {
     dependencies {
-        implementation project(':demo-core')
+        implementation project(":demo-core")
     }
 }
-project(':demo-service2') {
+project(":demo-service2") {
     dependencies {
-        implementation project(':demo-core')
+        implementation project(":demo-core")
     }
 }
-project(':rest-service') {
+project(":rest-service") {
     dependencies {
-        implementation project(':demo-core')
+        implementation project(":demo-core")
     }
 }
 
